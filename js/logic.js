@@ -2,6 +2,11 @@ let jugadapc;
 let jugadauser;
 let totaluser = 0;
 let totalpc = 0;
+const container = document.querySelector(".results");
+const resultadoPc = document.createElement("p");
+const resultadoUser = document.createElement("p");
+const ganadorPc = document.createElement("p");
+const ganadorUser = document.createElement("p");
 
 function computerPlay(){
     let eleccion = Math.random();
@@ -18,13 +23,13 @@ function computerPlay(){
 }
 
 function userPlay(string){
-    eleccion = string.toUpperCase();
+    eleccion = string;
 
-    if (eleccion  == "ROCK") {
+    if (eleccion  == "Rock") {
         return jugadauser = "Rock" 
-    }else if (eleccion  == "PAPER") {
+    }else if (eleccion  == "Paper") {
         return jugadauser = "Paper"
-    }else if(eleccion  == "SCISSORS"){
+    }else if(eleccion  == "Scissors"){
         return jugadauser = "Scissors"
     }
 }
@@ -60,16 +65,40 @@ function playFunction(jugadapc, jugadauser){
     // }
 }
 
+function winner(){
+    if (totaluser == 5) {
+        ganadorUser.textContent = "The winner is the User!";
+        container.appendChild(ganadorUser);
+    } else if(totalpc == 5){
+        ganadorPc.textContent = "The winner is the CPU!";
+        container.appendChild(ganadorPc);
+    }
+}
+
 function game(jugadauser){
     let ganador = "And the winner is: ";
-
-    for (let j = 0; j < 5; j++) {
-        let jugadauser = window.prompt("Insert the play that you are gonna make aganist the CPU");
+        //let jugadauser = window.prompt("Insert the play that you are gonna make aganist the CPU");
         playFunction(computerPlay(), userPlay(jugadauser));
         if (totaluser >= 3) {
             return console.log(ganador + "The user!");
         } else if(totalpc >= 3){
             return console.log(ganador + "The computer!");
         }
-    }
+}
+
+const buttons = document.querySelectorAll('button');
+
+buttons.forEach((button) => {    
+    button.addEventListener("click" , function(e){
+        game(button.textContent);
+        winner();
+        showResult(totaluser, totalpc);
+    });
+  });
+
+function showResult(totaluser, totalpc){
+    resultadoPc.textContent = "Computer score: " + totalpc;
+    resultadoUser.textContent = "User score: " + totaluser
+    container.appendChild(resultadoPc);
+    container.appendChild(resultadoUser);
 }

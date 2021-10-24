@@ -1,0 +1,19 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    margin-top: 150px;
+}
+
+.Buttons{
+    display: flex;
+    gap: 15px;
+}
+
+.results{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    gap: 10px;
+}
